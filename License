@@ -1,0 +1,34 @@
+
+### 3. Set Up a License
+
+Add a LICENSE file to your repository to specify the terms under which your project is distributed. You can choose a license from [choosealicense.com](https://choosealicense.com/).
+
+### 4. Set Up Continuous Integration (CI)
+
+Consider setting up a CI pipeline to automatically test your code on each push. GitHub Actions is a popular choice for this.
+
+1. **Create a Workflow File:**
+   - Create a file named `.github/workflows/ci.yml` in your repository.
+
+2. **Add a Basic Workflow:**
+   ```yaml
+   name: CI
+
+   on:
+     push:
+       branches: [ main ]
+     pull_request:
+       branches: [ main ]
+
+   jobs:
+     build:
+       runs-on: ubuntu-latest
+
+       steps:
+         - uses: actions/checkout@v2
+         - name: Set up Node.js
+           uses: actions/setup-node@v2
+           with:
+             node-version: '14'
+         - run: npm install
+         - run: npm test
